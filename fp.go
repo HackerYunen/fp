@@ -47,8 +47,6 @@ func newTlsConfig(option Option) (*tls.Config, error) {
 		} else {
 			tlsConfig = &tls.Config{Certificates: []tls.Certificate{certificate}}
 		}
-	} else if option.DomainNames != nil {
-		return gtls.TLS(option.DomainNames)
 	} else if certificate, err := gtls.CreateProxyCertWithName("test"); err != nil {
 		return tlsConfig, err
 	} else {
