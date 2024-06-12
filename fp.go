@@ -23,9 +23,13 @@ type Option struct {
 	NextProtos  []string
 	Handler     http.Handler
 	DomainNames []string
+	TLSConfig   *tls.Config
 }
 
 func newTlsConfig(option Option) (*tls.Config, error) {
+	if option.TLSConfig != nil {
+		return option.TLSConfig, nil
+	}
 	var tlsConfig *tls.Config
 	if option.Certificate.Certificate != nil {
 		tlsConfig = &tls.Config{Certificates: []tls.Certificate{option.Certificate}}
